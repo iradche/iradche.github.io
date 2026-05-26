@@ -1,122 +1,865 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Нейрокоучинг для айтишников</title>
 
-  
-  <meta name="description" content=" Blog Archives Recent Posts ">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  
-  <link rel="canonical" href="http://iradche.github.io/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    html {
+      scroll-behavior: smooth;
+    }
 
-  
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #fffaf5;
+      color: #3b2b22;
+      line-height: 1.65;
+    }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 250, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 153, 0, 0.12);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #ea580c;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-weight: 600;
+      color: #7c5a46;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 28px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ff7b00, #ffb347);
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(255, 136, 0, 0.25);
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      line-height: 1.05;
+      margin-bottom: 28px;
+      font-weight: 900;
+      color: #3f2b1f;
+    }
+
+    .gradient {
+      background: linear-gradient(135deg, #ff6b00, #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 21px;
+      color: #6b4c3b;
+      margin-bottom: 36px;
+      max-width: 650px;
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 34px;
+      padding: 24px;
+      border: 1px solid rgba(255, 145, 0, 0.12);
+      box-shadow: 0 18px 50px rgba(255, 153, 0, 0.12);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 24px;
+      margin-bottom: 22px;
+    }
+
+    .hero-card h3 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: #7a6150;
+    }
+
+    .stats {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .stat {
+      background: #fff;
+      border-radius: 18px;
+      padding: 16px 20px;
+      min-width: 140px;
+      border: 1px solid rgba(255, 153, 0, 0.12);
+      box-shadow: 0 8px 24px rgba(255, 153, 0, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      color: #ea580c;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    h2 {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3d2b22;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 60px;
+      color: #7b6657;
+      font-size: 19px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 26px;
+    }
+
+    .card {
+      background: white;
+      padding: 34px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 153, 0, 0.12);
+      box-shadow: 0 12px 40px rgba(255, 153, 0, 0.08);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #ea580c;
+    }
+
+    .card p {
+      color: #70594b;
+    }
+
+    .burnout-section {
+      background: linear-gradient(180deg, #fff4e8, #fffaf5);
+    }
+
+    .case {
+      background: white;
+      border-radius: 30px;
+      padding: 38px;
+      border-left: 8px solid #ff8c42;
+      box-shadow: 0 14px 40px rgba(255, 153, 0, 0.08);
+    }
+
+    .case h3 {
+      margin-bottom: 18px;
+      font-size: 28px;
+      color: #c2410c;
+    }
+
+    .case p {
+      color: #6f5648;
+      margin-bottom: 16px;
+    }
+
+    .case-grid {
+      display: grid;
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .result {
+      background: linear-gradient(145deg, #fff, #fff7ef);
+      border-radius: 28px;
+      padding: 34px;
+      border: 1px solid rgba(255, 153, 0, 0.12);
+      box-shadow: 0 10px 35px rgba(255, 153, 0, 0.08);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #fff1df;
+      color: #ea580c;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .session {
+      background: linear-gradient(145deg, #fff2e2, #fffaf5);
+      border-radius: 36px;
+      padding: 50px;
+      border: 1px solid rgba(255, 153, 0, 0.14);
+    }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .session-step {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(255, 153, 0, 0.08);
+    }
+
+    .session-step span {
+      color: #ea580c;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      border: 1px solid rgba(255, 153, 0, 0.12);
+      box-shadow: 0 12px 35px rgba(255, 153, 0, 0.08);
+    }
+
+    .featured {
+      border: 2px solid #ff8c42;
+      transform: scale(1.03);
+    }
+
+    .price {
+      font-size: 54px;
+      font-weight: 900;
+      margin: 18px 0;
+      color: #ea580c;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    ul li {
+      margin-bottom: 12px;
+      color: #6e5749;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .review {
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      border: 1px solid rgba(255, 153, 0, 0.12);
+      box-shadow: 0 12px 35px rgba(255, 153, 0, 0.08);
+    }
+
+    .review img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      background: linear-gradient(145deg, #ffedd5, #fff7ef);
+      border-radius: 40px;
+      padding: 80px 40px;
+      text-align: center;
+      border: 1px solid rgba(255, 153, 0, 0.14);
+    }
+
+    .cta p {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      color: #6b5648;
+      font-size: 19px;
+    }
+
+    footer {
+      padding: 50px 0;
+      text-align: center;
+      color: #8a7263;
+    }
+
+    @media (max-width: 920px) {
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h2 {
+        font-size: 38px;
+      }
+
+      .session {
+        padding: 32px;
+      }
+
+    }
+  </style>
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
+<body>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="iradche.github.io">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
+<header>
+  <div class="container nav">
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
+    <div class="logo">
+      Нейрокоучинг для IT
+    </div>
+
+    <div class="nav-links">
+      <a href="#burnout">Выгорание</a>
+      <a href="#results">Результаты</a>
+      <a href="#sessions">Сессии</a>
+      <a href="#pricing">Тарифы</a>
+      <a class="btn" href="#contact">Записаться</a>
+    </div>
+
   </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-  </ul>
-</section>
+</header>
 
+<section class="hero">
 
+  <div class="container hero-grid">
 
+    <div>
 
+      <h1>
+        Когда работа в IT превращается
+        в <span class="gradient">бесконечный режим выживания</span>
+      </h1>
 
-  
-</aside>
+      <p>
+        Нейрокоучинг для разработчиков, аналитиков, QA,
+        продактов, тимлидов и CTO.
+        Помогаю выйти из выгорания, вернуть энергию,
+        снизить тревогу и снова почувствовать,
+        что жизнь — это не только дедлайны.
+      </p>
+
+      <a class="btn" href="#contact">
+        Записаться на первую сессию
+      </a>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>100+</strong>
+          Сессий
+        </div>
+
+        <div class="stat">
+          <strong>10+</strong>
+          Лет в IT
+        </div>
+
+        <div class="stat">
+          <strong>1:1</strong>
+          Индивидуальная работа
+        </div>
+
+      </div>
 
     </div>
+
+    <div class="hero-card">
+
+      <img
+        src="https://avatars.githubusercontent.com/u/2790096?q=80&w=1200&auto=format&fit=crop"
+        alt="coach"
+      >
+
+      <h3>Ирина Радченко</h3>
+
+      <p>
+        Нейрокоуч для IT-специалистов.
+        Помогаю людям с перегруженным мозгом снова начать жить,
+        а не только «закрывать задачи».
+      </p>
+
+    </div>
+
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
 
+</section>
+
+<section id="burnout" class="burnout-section">
+
+  <div class="container">
+
+    <h2>Как выглядит выгорание у айтишников</h2>
+
+    <p class="section-subtitle">
+      Оно редко начинается с «я больше не могу».
+      Обычно всё начинается с хронической перегрузки,
+      которую человек долго считает нормой.
+    </p>
+
+    <div class="case-grid">
+
+      <div class="case">
+
+        <h3>Удалёнка, в которой невозможно выключиться</h3>
+
+        <p>
+          Ноутбук постоянно открыт. Slack приходит ночью.
+          Созвоны начинаются с утра и заканчиваются поздно вечером.
+          Человек физически дома — но психика никогда не выходит из работы.
+        </p>
+
+        <p>
+          Через несколько месяцев появляется ощущение,
+          что мозг работает без пауз.
+          Начинаются проблемы со сном, раздражительность,
+          невозможность отдыхать без чувства вины.
+        </p>
+
+      </div>
+
+      <div class="case">
+
+        <h3>Финтех и хроническое напряжение</h3>
+
+        <p>
+          Высокая ответственность, сложные интеграции,
+          регуляторные требования и постоянный страх «что-то уронить».
+        </p>
+
+        <p>
+          Многие специалисты в финтехе живут
+          в состоянии непрерывной тревожной готовности.
+          Даже в выходные мозг продолжает прокручивать прод,
+          инциденты и риски.
+        </p>
+
+      </div>
+
+      <div class="case">
+
+        <h3>Жесткие дедлайны и perpetual crunch mode</h3>
+
+        <p>
+          Проект давно должен был закончиться,
+          но сроки снова сдвинули.
+          Команда уже несколько месяцев работает
+          в режиме «ещё немного потерпеть».
+        </p>
+
+        <p>
+          В какой-то момент человек перестаёт понимать,
+          устал ли он временно —
+          или это уже его постоянное состояние.
+        </p>
+
+      </div>
+
+      <div class="case">
+
+        <h3>Постоянное усложнение даже рутинных задач</h3>
+
+        <p>
+          Чтобы сделать простую задачу,
+          теперь нужно пройти через 12 согласований,
+          5 сервисов, 3 legacy-системы и бесконечные митинги.
+        </p>
+
+        <p>
+          Мозг начинает воспринимать даже мелкие действия
+          как тяжёлую когнитивную нагрузку.
+          Появляется прокрастинация, апатия и ощущение бессмысленности.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="results">
+
+  <div class="container">
+
+    <h2>Что меняется после работы</h2>
+
+    <p class="section-subtitle">
+      Клиенты приходят не за «мотивацией».
+      Они приходят за ощущением,
+      что жизнь снова принадлежит им.
+    </p>
+
+    <div class="results-grid">
+
+      <div class="result">
+        <div class="tag">Senior Backend</div>
+
+        <h3>Перестал просыпаться с тревогой</h3>
+
+        <p>
+          Смог отключаться от работы вечером,
+          восстановил сон и перестал жить
+          в режиме постоянной внутренней гонки.
+        </p>
+      </div>
+
+      <div class="result">
+        <div class="tag">QA Lead</div>
+
+        <h3>Вышла из хронического выгорания</h3>
+
+        <p>
+          Перестала тащить на себе всю команду,
+          научилась выстраивать границы
+          и снова почувствовала интерес к профессии.
+        </p>
+      </div>
+
+      <div class="result">
+        <div class="tag">System Analyst</div>
+
+        <h3>Снова начал жить вне работы</h3>
+
+        <p>
+          Вернул спорт, общение и отдых без чувства вины.
+          Работа перестала занимать всё пространство в голове.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="sessions">
+
+  <div class="container">
+
+    <div class="session">
+
+      <h2>Как проходит нейрокоуч-сессия</h2>
+
+      <p class="section-subtitle">
+        Без эзотерики и токсичного позитивчика.
+        Мы разбираем проблему как сложную систему —
+        и ищем, где именно мозг перегружен.
+      </p>
+
+      <div class="session-grid">
+
+        <div class="session-step">
+          <span>ШАГ 1</span>
+          <h3>Разбор состояния</h3>
+          <p>
+            Анализируем стресс, тревогу,
+            перегрузку и повторяющиеся паттерны.
+          </p>
+        </div>
+
+        <div class="session-step">
+          <span>ШАГ 2</span>
+          <h3>Поиск причин</h3>
+          <p>
+            Ищем глубинные установки,
+            которые заставляют жить в режиме перегрузки.
+          </p>
+        </div>
+
+        <div class="session-step">
+          <span>ШАГ 3</span>
+          <h3>Перенастройка</h3>
+          <p>
+            Используем техники нейрокоучинга,
+            чтобы снизить внутреннее напряжение.
+          </p>
+        </div>
+
+        <div class="session-step">
+          <span>ШАГ 4</span>
+          <h3>Новые стратегии</h3>
+          <p>
+            Формируем устойчивые привычки и способы
+            работать без разрушения себя.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="pricing">
+
+  <div class="container">
+
+    <h2>Форматы работы</h2>
+
+    <p class="section-subtitle">
+      Стоимость и контакты можно заменить на свои.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+
+        <h3>Разовая сессия</h3>
+
+        <div class="price">
+          €XXX
+        </div>
+
+        <ul>
+          <li>✓ 60 минут</li>
+          <li>✓ Zoom / Google Meet</li>
+          <li>✓ Разбор ситуации</li>
+          <li>✓ Практические рекомендации</li>
+        </ul>
+
+      </div>
+
+      <div class="price-card featured">
+
+        <h3>Пакет сопровождения</h3>
+
+        <div class="price">
+          €XXXX
+        </div>
+
+        <ul>
+          <li>✓ 6–8 сессий</li>
+          <li>✓ Поддержка между встречами</li>
+          <li>✓ Работа с выгоранием</li>
+          <li>✓ Глубокие изменения</li>
+        </ul>
+
+      </div>
+
+      <div class="price-card">
+
+        <h3>VIP mentoring</h3>
+
+        <div class="price">
+          €XXXXX
+        </div>
+
+        <ul>
+          <li>✓ Для CTO и лидов</li>
+          <li>✓ Приоритетная связь</li>
+          <li>✓ Стратегическая поддержка</li>
+          <li>✓ Работа с высокой нагрузкой</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="container">
+
+    <h2>Отзывы клиентов</h2>
+
+    <p class="section-subtitle">
+      Некоторые отзывы
+    </p>
+
+    <div class="reviews-grid">
+
+      <div class="review">
+
+        <img
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop"
+          alt="client"
+        >
+
+        <p>
+          «Я впервые за много лет понял,
+          что можно работать без постоянного внутреннего давления и преодоления».
+        </p>
+
+        <strong>— Senior Developer</strong>
+
+      </div>
+
+      <div class="review">
+
+        <img
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"
+          alt="client"
+        >
+
+        <p>
+          «После работы с нейрокоучем я перестала
+          жить в режиме вечного дедлайна».
+        </p>
+
+        <strong>— QA Engineer</strong>
+
+      </div>
+
+      <div class="review">
+
+        <img
+          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop"
+          alt="client"
+        >
+
+        <p>
+          «Я хотел уйти из IT.
+          Сейчас я снова чувствую интерес к жизни».
+        </p>
+
+        <strong>— Team Lead</strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="contact">
+
+  <div class="container">
+
+    <div class="cta">
+
+      <h2>
+        Возможно, вам не нужен ещё один отпуск.
+        Возможно, вам нужно перестать жить в режиме перегрузки.
+      </h2>
+
+      <p>
+        Если вы чувствуете,
+        что работа постепенно забирает все силы —
+        с этим можно работать.
+      </p>
+
+      <a class="btn" href="#">
+        Написать в Telegram
+      </a>
+
+      <p style="margin-top:22px;">
+        @dadaistka
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Нейрокоучинг для IT-специалистов
+  </div>
 </footer>
-  
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
 
 </body>
 </html>
